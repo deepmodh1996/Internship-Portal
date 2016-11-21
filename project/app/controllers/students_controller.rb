@@ -43,20 +43,21 @@ def destroy
     redirect_to students_path
   end
 
+  def verify
+  @student = Student.find(params[:id])
+  end
+
  def upload
  	@student = Student.find(params[:id])
- 	#  if @student.save
-  #   redirect_to @student
-  # else
-  #   render 'new'
-  # end
 
-end
+ end
+
+
   
  
 private
   def student_params
-    params.require(:student).permit(:name, :roll_no, :department, :batch, :program, :category, :dob, :nationality, :sex, :gpo_id, :alt_email, :hostel, :mobile, :alt_mobile, :home_contact, :permanent_addr, :specialization, :skype, :cv, :email, :password, :password_confirmation)
+    params.require(:student).permit(:name, :roll_no, :department, :batch, :program, :category, :dob, :nationality, :sex, :gpo_id, :alt_email, :hostel, :mobile, :alt_mobile, :home_contact, :permanent_addr, :specialization, :skype, :cv, :email, :password, :password_confirmation, :verified)
   end
 end
 

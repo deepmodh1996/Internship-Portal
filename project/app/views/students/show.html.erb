@@ -13,6 +13,12 @@
 </p>
 
 <%= link_to 'Upload', upload_student_path(@student) %>
+<% if @student.verified %>
+	<p> link to iaf </p>
+<% else %>
+	<%= link_to 'Verify', verify_student_path(@student) %>
+
+<% end %>		
 <%= link_to 'proof_upload', new_student_verification_path(@student) %>
 <%= link_to 'Edit', edit_student_path(@student) %>
 <%= link_to 'Back', students_path %>

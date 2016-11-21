@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161120175852) do
+ActiveRecord::Schema.define(version: 20161121180210) do
 
   create_table "students", force: true do |t|
     t.string   "name"
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 20161120175852) do
     t.string   "cv_content_type"
     t.integer  "cv_file_size"
     t.datetime "cv_updated_at"
+    t.boolean  "verified",        default: false
   end
 
   create_table "verifications", force: true do |t|

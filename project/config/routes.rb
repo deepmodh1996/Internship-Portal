@@ -11,6 +11,7 @@ Project::Application.routes.draw do
    resources :students do
       resources :verifications
       member do
+      get 'verify', :action => 'verify'
       get 'upload', :action => 'upload'
       end
     end
