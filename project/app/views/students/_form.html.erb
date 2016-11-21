@@ -1,0 +1,123 @@
+  <%= form_for @student do |f| %>
+ 
+  <% if @student.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@student.errors.count, "error") %> prohibited
+        this student from being saved:
+      </h2>
+      <ul>
+        <% @student.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+ 
+ <p>
+    <%= f.label :email %><br />
+    <%= f.text_field :email %>
+  </p>
+  <p>
+    <%= f.label :password %><br />
+    <%= f.password_field :password %>
+  </p>
+  <p>
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation %>
+  </p>
+  <p>
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </p>
+ 
+  <p>
+    <%= f.label :roll_no %><br>
+    <%= f.text_field :roll_no %>
+  </p>
+
+  <p>
+    <%= f.label :department %><br>
+    <%= f.text_field :department %>
+  </p>
+
+  <p>
+    <%= f.label :batch %><br>
+    <%= f.text_field :batch %>
+  </p>
+
+  <p>
+    <%= f.label :program %><br>
+    <%= f.text_field :program %>
+  </p> 
+
+  <p>
+    <%= f.label :category %><br>
+    <%= f.text_field :category %>
+  </p>
+
+  <p>
+   Birthday:
+  <input type="date" name="dob">
+  </p>
+
+    <p>
+    <%= f.label :nationality %><br>
+    <%= f.text_field :nationality %>
+  </p>
+ 
+ <p>
+  <input type="radio" name="sex" value="male" checked> Male<br>
+  <input type="radio" name="sex" value="female"> Female<br>
+  </p>
+
+    <p>
+    <%= f.label :gpo_id %><br>
+    <%= f.text_field :gpo_id %>
+  </p>
+
+  <p>
+    <%= f.label :alt_email %><br>
+    <%= f.text_field :alt_email %>
+  </p>
+
+  <p>
+    <%= f.label :hostel %><br>
+    <%= f.text_field :hostel %>
+  </p>
+
+  <p>
+    <%= f.label :mobile %><br>
+    <%= f.text_field :mobile %>
+  </p>
+
+  <p>
+    <%= f.label :alt_mobile %><br>
+    <%= f.text_field :alt_mobile %>
+  </p>
+
+  <p>
+    <%= f.label :home_contact %><br>
+    <%= f.text_field :home_contact %>
+  </p>
+
+  <p>
+    <%= f.label :permanent_addr %><br>
+    <%= f.text_area :permanent_addr %>
+  </p>
+
+  <p>
+    <%= f.label :specialization %><br>
+    <%= f.text_field :specialization %>
+  </p> 
+
+  <p>
+    <%= f.label :skype %><br>
+    <%= f.text_field :skype %>
+  </p>
+
+  <p>
+    <%= f.submit %>
+  </p>
+ 
+<% end %>
