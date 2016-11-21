@@ -1,0 +1,42 @@
+<p>
+<strong>Job Profile:</strong>
+  <%= @iaf.profile %>
+</p>
+ 
+<p>
+  <strong>Internship Job Description:</strong>
+  <%= @iaf.intern_job_description %>
+</p>
+
+<p>
+  <strong>Place of Posting:</strong>
+  <%= @iaf.place_of_posting %>
+</p>
+ 
+<p>
+  <strong>Stipend:</strong>
+  <%= @iaf.stipend %>
+</p>
+
+<p>
+  <strong>Opens On:</strong>
+  <%= @iaf.opens_on %>
+</p>
+ 
+<p>
+  <strong>Closes On:</strong>
+  <%= @iaf.closes_on %>
+</p>
+
+<p>
+  <strong>CPI Cutoff:</strong>
+  <%= @iaf.cpi_cutoff %>
+</p>
+ 
+<p>
+  <strong>Open for departments:</strong>
+  <%= @iaf.departments %>
+</p>
+<%=link_to 'Edit IAF', edit_company_information_iaf_path(@company_information,@iaf)%>
+<%= link_to 'Back', company_information_iafs_path%>
+
