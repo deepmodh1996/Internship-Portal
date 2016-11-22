@@ -38,7 +38,4 @@
   <%= @iaf.departments %>
 </p>
 
-<%=link_to 'Edit IAF', edit_company_information_iaf_path(@company_information,@iaf)%>
-<%= link_to 'Show Signed Students', shortlist_path(@company_information,@iaf)%>
-<%= link_to 'Back', company_information_iafs_path%>
-
+<%= link_to 'Back', student_path(params[:id])%>

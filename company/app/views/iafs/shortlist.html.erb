@@ -1,0 +1,25 @@
+<h1>Listing signed students</h1>
+ 
+<!-- <h2><%= debug @list %></h2>  -->
+<table>
+  <tr>
+    <th>name</th>
+    <th>roll no</th>
+    <th>department</th>
+  </tr>
+ 
+  <% @list.each(:as => :hash) do |student| %>
+    <tr>
+      <td><%= student['name'] %></td>
+      <td><%= student['roll_no'] %></td>
+      <td><%= student['department'] %></td>
+        <% temp = JSON.parse ActiveRecord::Base.connection.execute("SELECT count(*) FROM shortlists where (iaf_id = "+params[:id].to_s+" and student_id = "+student['id'].to_s+" and status = 1);").to_json; %>
+        <% total = temp[0][0] %>
+        <% if total > 0 %>
+        <td><%= link_to('Shortlisted',{:action => 'unselect_student',:student => student['id'], :iaf => params[:id]}) %></td>
+        <% else %>
+        <td><%= link_to('Shortlist',{:action => 'select_student',:student => student['id'], :iaf => params[:id]}) %></td>
+        <% end %>
+    </tr>
+  <% end %>
+</table>

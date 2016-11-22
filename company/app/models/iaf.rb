@@ -1,5 +1,6 @@
 class Iaf < ApplicationRecord
 	belongs_to :company_information
+	has_many :shortlists
 	validates :profile, presence:true
 	validates :intern_job_description, presence: true
 	validates :stipend, presence: true

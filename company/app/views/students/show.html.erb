@@ -1,0 +1,48 @@
+<p>
+  <strong>Name:</strong>
+  <%= @student.name %>
+</p>
+ 
+<p>
+  <strong>Department:</strong>
+  <%= @student.department %>
+</p>
+
+<p>
+<%= link_to "Download", @student.cv.url(:original, false) %>
+</p>
+
+<%= link_to 'Upload', upload_student_path(@student) %>
+<%= link_to 'proof_upload', new_student_verification_path(@student) %>
+<%= link_to 'Edit', edit_student_path(@student) %>
+<%= link_to 'Back', students_path %>
+<br>
+<br>
+<h3>IAFS</h3>
+<br>
+<table>
+	<th><strong>Job Profile</strong></th>
+	<th colspan="3"></th>
+
+<% select_id = JSON.parse ActiveRecord::Base.connection.execute("SELECT iaf_id FROM shortlists where (status = 2 and student_id = "+@student.id.to_s+");").to_json; %>
+  <% if select_id.length != 0 %>
+      <tr> <td><%= link_to('View IAF',{:action => 'show_student_iaf',:iaf => iaf})%></td><td> Selected</td></tr>
+  <% else %>
+        <% @iafs.each do |iaf| %>
+        <tr><td>
+          <%= iaf.profile %>
+        	</td>
+        	<td><%= link_to('View IAF',{:action => 'show_student_iaf',:iaf => iaf})%></td>
+          <% temp = JSON.parse ActiveRecord::Base.connection.execute("SELECT status FROM shortlists where (iaf_id = "+iaf.id.to_s+" and student_id = "+@student.id.to_s+");").to_json; %>
+          <% if temp.length != 0 %>
+        	<td><%= link_to('Unsign IAF',{:action => 'unsign_iaf',:student => @student, :iaf => iaf}) %></td>
+          <td> Pending </td>
+          <% else %>
+        	<td><%= link_to('Sign IAF',{:action => 'sign_iaf',:student => @student, :iaf => iaf}) %></td>
+          <td>Jaf Not Signed</td>
+          <% end %>
+  <% end %>
+
+</tr>
+<% end %>
+</table>

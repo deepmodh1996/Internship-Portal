@@ -9,10 +9,6 @@ class CreateIafs < ActiveRecord::Migration[5.0]
       t.date :closes_on
       t.float :cpi_cutoff
       t.string :departments
-      t.bool :cse
-      t.bool :elec
-      t.bool :mech
-      t.bool :meta
       t.timestamps
     end
   end
