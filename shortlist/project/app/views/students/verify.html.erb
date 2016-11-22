@@ -1,0 +1,18 @@
+<h1>Verify</h1>
+
+<%= form_for @student, url: {action: "update", params: {id: @student.id}} do |f| %>
+
+<p>
+  <strong>name:</strong>
+  <%= @student.name %>
+</p>
+
+<%= f.radio_button :verified, true %>
+<%= label :verified, 'true' %>
+<%= f.radio_button :verified, false %>
+<%= label :verified, 'false' %>
+ 
+ <p>
+  <%= f.submit 'Verify', class: 'btn btn-primary' %>
+  </p>
+<% end %>

@@ -1,0 +1,71 @@
+<div id="menu">
+  <ul>
+    <li class="current_page_item"><a href="#">Home</a></li>
+    <li><%= link_to "IAFS", student_all_iafs_path(@student.id) %></li>
+    <li><%= link_to "Resumes", student_verifications_path(@student.id) %></li>
+    <li><%= link_to "Profile", edit_student_path(@student.id) %></li>
+    <li><a href="results.html">Results</a></li>
+    <li class="last"><%= link_to "Logout", log_out_path %></li>
+  </ul>
+</div>
+
+  <!-- <div id="banner"><img src="<%= image_path('header-image-bg.jpg') %>" width="1200" height="400" alt="" /></div> -->
+  <div id="three-columns">
+    <div class="content">
+      <div id="column1">
+        <h2>Resume<%= link_to 'Upload Resume', upload_student_path(@student), class: 'btn btn-success float-R' %></h2>
+        <ul class="list-style2">
+          <li class="first"><%= link_to "One page technical (Resume_1)", @student.cv.url(:original, false) %></li>
+          <li><%= link_to "Two page technical (Resume_1)", @student.cv.url(:original, false) %></li>
+          <li><%= link_to "Three page technical (Resume_1)", @student.cv.url(:original, false) %></li>
+          <li><%= link_to "One page non-technical (Resume_1)", @student.cv.url(:original, false) %></li>
+          <li><%= link_to "Two page non-technical (Resume_1)", @student.cv.url(:original, false) %></li>
+        </ul>
+        <h2>SOP<%= link_to 'Upload SOP', upload_student_path(@student), class: 'btn btn-success float-R' %></h2>
+        <ul class="list-style2 text-center">
+          <li class="first"><%= link_to "SOP 1", @student.cv.url(:original, false) %></li>
+          <li><%= link_to "SOP 2", @student.cv.url(:original, false) %></li>
+          <li><%= link_to "SOP 3", @student.cv.url(:original, false) %></li>
+          <li><%= link_to "SOP 4", @student.cv.url(:original, false) %></li>
+          <li><%= link_to "SOP 5", @student.cv.url(:original, false) %></li>
+        </ul>
+      </div>
+      <div id="column2">
+        <h4 class="text-center">No of open JAFs are <strong>8</strong>. || JAFs closing today are <strong>0</strong></h4>
+        <h4 class="text-center">You got Job in company <strong>daikin</strong> of JAF <strong>1</strong> of type <strong>N</strong></h4>
+        <h2 style="padding-top:10px">Recent IAFS</h2>
+        <ul class="list-style1">
+        <% select_id = JSON.parse ActiveRecord::Base.connection.execute("SELECT iaf_id FROM shortlists where (status = 2 and student_id = "+@student.id.to_s+");").to_json; %>
+       
+          <% @iafs.each do |iaf| %>
+            <li>
+              <h4><strong><%= iaf.profile %> </strong></h4>
+              <p><strong><%= iaf.intern_job_description %></strong> Closes on <strong><%= iaf.closes_on %></strong> It's place of posting is <strong><%= iaf.place_of_posting %></strong>.</p>
+              <p>Gross pay : <strong><%= iaf.stipend %> INR</strong> </p>
+              <p><%= link_to('Read More',{:action => 'show_student_iaf',:iaf => iaf},{:class => 'link-style'})%></p>
+              <% temp = JSON.parse ActiveRecord::Base.connection.execute("SELECT status FROM shortlists where (iaf_id = "+iaf.id.to_s+" and student_id = "+@student.id.to_s+");").to_json; %>
+              <% if temp.length != 0 %>
+                <%= link_to('Unsign IAF',{:action => 'unsign_iaf',:student => @student, :iaf => iaf, :from => 0},{:class => 'btn btn-warning btn-sm float-R'}) %>
+                Status : <strong>Pending</strong>
+              <% else %>
+                <%= link_to('Sign IAF',{:action => 'sign_iaf',:student => @student, :iaf => iaf, :from => 0},{:class => 'btn btn-success btn-sm float-R'}) %>
+                Status : <strong>Jaf Not Signed</strong>
+              </li>
+              <% end %>
+        
+        <% end %>
+        </ul>
+      </div>
+      <div id="column3">
+        <p class="text-center"><img src="<%= image_path('Neeladri.jpg') %>" style="box-shadow: 0 7px 10px #999;" width="150px" height="150px" class="img-thumbnail" alt="Neeladrishekhar Kanjilal" /></p>
+        <h3 class="text-center"><strong>Personal Information</strong><div class="heading-line"></div></h3>
+        <div class="personal-wrapper text-center">
+          <span><strong>name : </strong><%= @student.name %></span>
+          <span><strong>roll no : </strong><%= @student.roll_no %></span>
+          <span><strong>program : </strong>UG Third Year (B.Tech.)</span>
+          <span><strong>department : </strong><%= @student.department %></span>
+        </div>
+        <p class="text-center"><!--<a href="#" class="btn btn-primary">Want to Change your Details</a>--><%= link_to 'Want to Change your Details', edit_student_path(@student), class: 'btn btn-primary' %></p>
+      </div>
+    </div>
+  </div>

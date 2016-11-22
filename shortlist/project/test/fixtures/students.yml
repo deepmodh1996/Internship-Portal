@@ -1,0 +1,41 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  roll_no: MyString
+  department: MyString
+  batch: MyString
+  program: MyString
+  category: MyString
+  dob: 2016-10-31
+  nationality: MyString
+  sex: MyString
+  gpo_id: MyString
+  alt_email: MyString
+  hostel: MyText
+  mobile: MyString
+  alt_mobile: MyString
+  home_contact: MyString
+  permanent_addr: MyText
+  specialization: MyString
+  skype: MyString
+
+two:
+  name: MyString
+  roll_no: MyString
+  department: MyString
+  batch: MyString
+  program: MyString
+  category: MyString
+  dob: 2016-10-31
+  nationality: MyString
+  sex: MyString
+  gpo_id: MyString
+  alt_email: MyString
+  hostel: MyText
+  mobile: MyString
+  alt_mobile: MyString
+  home_contact: MyString
+  permanent_addr: MyText
+  specialization: MyString
+  skype: MyString

@@ -1,0 +1,2 @@
+module IafsHelper
+end
