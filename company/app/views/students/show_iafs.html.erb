@@ -1,0 +1,99 @@
+<div id="menu">
+  <ul>
+    <li><%= link_to "Home", student_path(@student.id) %></li>
+    <li class="current_page_item"><a href="#">IAFs</a></li>
+    <li><%= link_to "Resumes", student_verifications_path(@student.id) %></li>
+    <li><%= link_to "Profile", edit_student_path(@student.id) %></li>
+    <li><a href="results.html">Results</a></li>
+    <li class="last"><%= link_to "Logout", log_out_path %></li>
+  </ul>
+</div>
+
+  <!-- <div id="banner"><img src="<%= image_path('header-image-bg.jpg') %>" width="1200" height="400" alt="" /></div> -->
+  <div id="welcome">
+    <div class="row">
+      <div class="col-xs-8">
+        <strong class="btn btn-primary">You have 0.0 Point(s)</strong>
+        <strong class="btn btn-success">Have 1 Job(s)</strong>
+        <strong class="btn btn-success">Have signed 11 jaf(s)</strong>
+        <div class="row">
+          <div class="col-xs-6">
+            <label for="company-name">Type company name here : </label>
+            <input type="text" id="company-name" class="form-control">
+          </div>
+          <div class="col-xs-3">
+            <label for="jaf-filter">Filter JAFs by : </label>
+            <select id="jaf-filter" class="form-control">
+              <option>All</option>
+              <option>Already Signed</option>
+              <option>CPI Cutoff</option>
+              <option>Gross Cutoff</option>
+              <option>can Sign</option>
+              <option>cannot Sign</option>
+              <option>Not Eligible</option>
+            </select>
+          </div>
+          <div class="col-xs-3">
+            <label for="jaf-sort">Sort JAFs by : </label>
+            <select id="jaf-sort" class="form-control">
+              <option>Closing Date</option>
+              <option>Company Name</option>
+              <option>CPI Cutoff</option>
+              <option>Gross Cutoff</option>
+              <option>Gross Pay</option>
+            </select>
+          </div>
+        </div>
+        <ul class="list-style1">
+          <% select_id = JSON.parse ActiveRecord::Base.connection.execute("SELECT iaf_id FROM shortlists where (status = 2 and student_id = "+@student.id.to_s+");").to_json; %>
+          <% if select_id.length != 0 %>
+            <li class="first">
+             <p><strong>You are already selected.</strong></p> <p><%= link_to('View IAF',{:action => 'show_student_iaf',:iaf => iaf},{:class => 'link-style'})%></p>
+            </li>
+          <% else %>
+            <% @iafs.each do |iaf| %>
+            <li>
+              <h4><strong><%= iaf.profile %> </strong></h4>
+              <p><strong><%= link_to( iaf.intern_job_description,{:action => 'show_student_iaf',:iaf => iaf})%></strong> Closes on <strong><%= iaf.closes_on %></strong> It's place of posting is <strong><%= iaf.place_of_posting %></strong>.</p>
+              <p>Gross pay : <strong><%= iaf.stipend %> INR</strong> </p>
+              <% temp = JSON.parse ActiveRecord::Base.connection.execute("SELECT status FROM shortlists where (iaf_id = "+iaf.id.to_s+" and student_id = "+@student.id.to_s+");").to_json; %>
+              <% if temp.length != 0 %>
+                <%= link_to('Unsign IAF',{:action => 'unsign_iaf',:student => @student, :iaf => iaf, :from => 1},{:class => 'btn btn-warning btn-sm float-R'}) %>
+                Status : <strong>Pending</strong>
+              <% else %>
+                <%= link_to('Sign IAF',{:action => 'sign_iaf',:student => @student, :iaf => iaf, :from => 1},{:class => 'btn btn-success btn-sm float-R'}) %>
+                Status : <strong>Jaf Not Signed</strong>
+              </li>
+              <% end %>
+            </li>
+            <% end %>
+          <% end %>
+        </ul>
+      </div>
+      <div class="col-xs-4">
+        <h2>Results</h2>
+        <ul class="list-style2">
+          <li class="first">
+            <a href="#">Carnot Technology Private Limited : JAF NO. 1</a>
+            <button class="btn btn-secondary btn-sm">Pending</button>
+          </li>
+          <li>
+            <a href="#">Carnot Technology Private Limited : JAF NO. 2</a>
+            <button class="btn btn-danger btn-sm">Not Shortlisted</button>
+          </li>
+          <li>
+            <a href="#">DERQ : JAF NO. 2</a>
+            <button class="btn btn-primary btn-sm">Shortlisted</button>
+          </li>
+          <li>
+            <a href="#">Focus Analytics : JAF NO. 1</a>
+            <button class="btn btn-danger btn-sm">Not Recruited</button>
+          </li>
+          <li>
+            <a href="#">Daikin Industries : JAF NO. 1</a>
+            <button class="btn btn-success btn-sm">Recruited</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>

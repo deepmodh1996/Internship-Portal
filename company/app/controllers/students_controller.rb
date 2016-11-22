@@ -8,13 +8,22 @@ class StudentsController < ApplicationController
     @iaf = Iaf.find(params[:iaf]);
   end
 
+  def show_iafs
+    @student = Student.find(params[:id])
+    @iafs = Iaf.all
+  end
+
   def sign_iaf
     num = JSON.parse ActiveRecord::Base.connection.execute("SELECT count(*) FROM shortlists where (iaf_id = "+params[:iaf]+" and student_id  = "+params[:student]+");").to_json;
      # = num;
     if (num[0][0] == 0)
       ActiveRecord::Base.connection.execute("INSERT INTO shortlists (iaf_id,student_id,status,created_at,updated_at) values ("+params[:iaf]+","+params[:student]+",0,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);");
     end
-    redirect_to student_path(params[:student]);
+    if params[:from] == '1'
+      redirect_to student_all_iafs_path(params[:student]);
+    else
+      redirect_to student_path(params[:student]);
+    end
   end
 
   def unsign_iaf
@@ -22,7 +31,11 @@ class StudentsController < ApplicationController
     if (num[0][0] > 0)
       ActiveRecord::Base.connection.execute("DELETE FROM shortlists WHERE iaf_id = "+params[:iaf]+" and student_id = "+params[:student]+";");
     end
+    if params[:from] == '1'
+      redirect_to student_all_iafs_path(params[:student]);
+    else
       redirect_to student_path(params[:student]);
+    end
   end
 
   def show
@@ -38,8 +51,8 @@ class StudentsController < ApplicationController
   end
 
   def edit
-  @student = Student.find(params[:id])
-end
+    @student = Student.find(params[:id])
+  end
 
   def create
   @student = Student.new(student_params)
@@ -55,7 +68,7 @@ end
   @student = Student.find(params[:id])
  
   if @student.update(student_params)
-    redirect_to @student
+    redirect_to edit_student_path(params[:id])
   else
     render 'edit'
   end

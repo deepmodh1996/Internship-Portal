@@ -5,7 +5,7 @@ html, body {
 body {
 	margin: 0;
 	padding: 0;
-	background: #055657 url(../img/bg01.jpg) repeat;
+	background: #055657 url(asset-path('bg01.jpg')) repeat;
 	font-family: 'Source Sans Pro', sans-serif;
 	font-size: 14px;
 	color: #454545;
@@ -136,14 +136,14 @@ hr {
 #premenu {
 	width: 1200px;
 	height: 10px;
-	background: #055657 url(../img/bg01.jpg) repeat;
+	background: #055657 url(asset-path('bg01.jpg')) repeat;
 }
 
 #menu {
 	overflow: hidden;
 	width: 1200px;
 	height: 70px;
-	background: #055657 url(../img/bg01.jpg) repeat;
+	background: #055657 url(asset-path('bg01.jpg')) repeat;
 	font-size: 20px;
 	color: #000000;
 }
@@ -366,6 +366,11 @@ hr {
 	border-top: 1px solid #D4D4D4;
 }
 
+.list-style1 .bottom {
+	border-top: none;
+	border-bottom: 1px solid #D4D4D4;
+}
+
 .list-style1 .date {
 	font-weight: bold;
 	color: #212121;
@@ -407,7 +412,7 @@ hr {
 	display: inline-block;
 	margin-top: 10px;
 	padding: 5px 15px;
-	background: #055657 url(../img/bg01.jpg) repeat;
+	background: #055657 url(asset-path('bg01.jpg')) repeat;
 	letter-spacing: 1px;
 	text-decoration: none;
 	text-shadow: 1px 0px 1px #5C1111;
@@ -548,6 +553,6 @@ hr {
 
 .divider {
 	height: 5px;
-	background: #055657 url(../img/bg01.jpg) repeat;
+	background: #055657 url(asset-path('bg01.jpg')) repeat;
 	margin-bottom: 10px;
 }

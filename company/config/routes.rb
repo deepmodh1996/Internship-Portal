@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   get "log_out" => "sessions#destroy", :as => "log_out"
   get "log_in" => "sessions#new", :as => "log_in"
   get "sign_up" => "students#new", :as => "sign_up"
-  root :to => "students#new"
+  root :to => "sessions#new"
   # You can have the root of your site routed with "root"
    resources :students do
       resources :verifications
@@ -19,6 +19,7 @@ Rails.application.routes.draw do
     end
 
   get "students/:id/show_student_iaf" => "students#show_student_iaf", :as => "student_iafs"
+  get "students/:id/show_iafs" => "students#show_iafs", :as => "student_all_iafs"
   get "students/:id/sign_iaf" => "students#sign_iaf", :as => "sign_iaf"
   get "students/:id/unsign_iaf" => "students#unsign_iaf", :as => "unsign_iaf"
   get "company_informations/:company_information_id/iafs/:id/shortlist" => "iafs#shortlist", :as => "shortlist"
