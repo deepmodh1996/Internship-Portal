@@ -1,22 +1,22 @@
+<div id="menu">
+    <ul>
+      <li class="last"><a href="#">All Companies</a></li>
+    </ul>
+  </div>
+<div id="welcome">
+
 <p id="notice"><%= notice %></p>
 
 <h1>Company Informations</h1>
 
-<table>
+
+<table class="table table-striped">
   <thead>
     <tr>
       <th>Name</th>
-      <th>Address line1</th>
-      <th>Address line2</th>
       <th>City</th>
-      <th>Country</th>
-      <th>Pin</th>
       <th>Url</th>
       <th>Contact person</th>
-      <th>Designation</th>
-      <th>Email</th>
-      <th>Contact number</th>
-      <th>Cell number</th>
       <th>Type</th>
       <th colspan="3"></th>
     </tr>
@@ -26,20 +26,12 @@
     <% @company_informations.each do |company_information| %>
       <tr>
         <td><%= company_information.name %></td>
-        <td><%= company_information.address_line1 %></td>
-        <td><%= company_information.address_line2 %></td>
         <td><%= company_information.city %></td>
-        <td><%= company_information.country %></td>
-        <td><%= company_information.pin %></td>
         <td><%= company_information.url %></td>
         <td><%= company_information.contact_person %></td>
-        <td><%= company_information.designation %></td>
-        <td><%= company_information.email %></td>
-        <td><%= company_information.contact_number %></td>
-        <td><%= company_information.cell_number %></td>
-        <td><%= company_information.type %></td>
-        <td><%= link_to 'Show', company_information %></td>
-        <td><%= link_to 'Edit', edit_company_information_path(company_information) %></td>
+        <td><%= company_information.nature %></td>
+        <!-- <td><%#= link_to 'Show', company_information %></td> -->
+        <td><%= link_to 'Show', edit_company_information_path(company_information) %></td>
         <td><%= link_to 'Destroy', company_information, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
@@ -49,3 +41,5 @@
 <br>
 
 <%= link_to 'New Company Information', new_company_information_path %>
+<%= link_to 'Login Page', root_path, class: "btn btn-primary btn-sm float-R" %>
+</div>

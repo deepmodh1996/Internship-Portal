@@ -1,10 +1,22 @@
-<h1>Listing students</h1>
+<div id="menu">
+  <ul>
+    <li><%= link_to "Home", student_path(current_student.id) %></li>
+    <li><%= link_to "IAFS", student_all_iafs_path(current_student.id) %></li>
+    <li><%= link_to "Resumes", student_verifications_path(current_student.id) %></li>
+    <li><%= link_to "Profile", edit_student_path(current_student.id) %></li>
+    <li><%= link_to "Reviews", student_reviews_path(current_student.id) %></li>
+    <li class="last"><%= link_to "Logout", log_out_path %></li>
+  </ul>
+</div>
+<div id="welcome">
+<h2>Listing all students</h2>
  
-<table>
+<table class="table table-striped">
   <tr>
     <th>name</th>
     <th>roll no</th>
     <th>department</th>
+    <th colspan="4"></th>
   </tr>
  
   <% @students.each do |student| %>
@@ -21,3 +33,4 @@
     </tr>
   <% end %>
 </table>
+</div>

@@ -13,7 +13,9 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
    resources :students do
       resources :verifications
+      resources :reviews
       member do
+      get 'verify', :action => 'verify'
       get 'upload', :action => 'upload'
       end
     end
@@ -25,8 +27,9 @@ Rails.application.routes.draw do
   get "company_informations/:company_information_id/iafs/:id/shortlist" => "iafs#shortlist", :as => "shortlist"
   get "company_informations/:company_information_id/iafs/:id/select_student" => "iafs#select_student", :as => "select_student"
   get "company_informations/:company_information_id/iafs/:id/unselect_student" => "iafs#unselect_student", :as => "unselect_student"
+  get "students/:id/verify_confirm" => "students#verify_confirm", :as => "confirm_student"
+  get "company_informations/:company_information_id/iafs/:id/freeze_shortlist" => "iafs#freeze_shortlist", :as => "freeze_shortlist"
  
-
 resources :sessions
   resources :company_informations	do
   	resources :iafs

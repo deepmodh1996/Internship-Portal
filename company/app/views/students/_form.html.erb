@@ -1,5 +1,5 @@
   
-      <%= form_for @student, :html => {class: 'edit_student row'} do |f| %> 
+      <%= form_for @student, :html => {class: 'row'} do |f| %> 
         <% if @student.errors.any? %>
           <div id="error_explanation">
             <h2>
@@ -85,7 +85,7 @@
           </div>
           <div class="form-group input-group">
             <div class="input-group-addon">Password</div>
-            <input type="text" class="form-control" name="student[password]">
+            <input type="password" class="form-control" name="student[password]">
           </div>
           <div class="form-group input-group">
             <div class="input-group-addon">Department</div>
@@ -108,7 +108,7 @@
           </div>
           <div class="form-group input-group">
             <div class="input-group-addon">Confirm Password</div>
-            <input type="text" class="form-control" name="student[password_confirmation]">
+            <input type="password" class="form-control" name="student[password_confirmation]">
           </div>
           <div class="form-group input-group">
             <div class="input-group-addon">Program</div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161122060630) do
+ActiveRecord::Schema.define(version: 20161122235413) do
 
   create_table "company_informations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "name"
@@ -25,9 +25,9 @@ ActiveRecord::Schema.define(version: 20161122060630) do
     t.string   "email"
     t.string   "contact_number"
     t.string   "cell_number"
-    t.string   "type"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.string   "nature"
   end
 
   create_table "iafs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
@@ -39,14 +39,24 @@ ActiveRecord::Schema.define(version: 20161122060630) do
     t.date     "closes_on"
     t.float    "cpi_cutoff",             limit: 24
     t.string   "departments"
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
+    t.datetime "created_at",                                       null: false
+    t.datetime "updated_at",                                       null: false
     t.boolean  "cse"
     t.boolean  "elec"
     t.boolean  "mech"
     t.boolean  "meta"
     t.integer  "company_information_id"
+    t.integer  "status",                               default: 1
     t.index ["company_information_id"], name: "index_iafs_on_company_information_id", using: :btree
+  end
+
+  create_table "reviews", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.string   "organisation"
+    t.text     "review",       limit: 65535
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.integer  "student_id"
+    t.index ["student_id"], name: "index_reviews_on_student_id", using: :btree
   end
 
   create_table "shortlists", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
@@ -85,6 +95,8 @@ ActiveRecord::Schema.define(version: 20161122060630) do
     t.string   "email"
     t.string   "password_hash"
     t.string   "password_salt"
+    t.boolean  "admin",                         default: false
+    t.boolean  "verified",                      default: false
   end
 
   create_table "verifications", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|

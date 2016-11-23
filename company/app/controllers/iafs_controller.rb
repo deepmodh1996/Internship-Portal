@@ -36,6 +36,20 @@ class IafsController < ApplicationController
 		redirect_to shortlist_path(:id => params[:iaf])
 	end
 	
+	def freeze_shortlist
+		ActiveRecord::Base.connection.execute("UPDATE iafs SET status = 2 WHERE (id = "+params[:iaf]+");");
+
+		ActiveRecord::Base.connection.execute("DELETE FROM shortlists WHERE (iaf_id = "+params[:iaf]+" and status = 0);");
+		ActiveRecord::Base.connection.execute("UPDATE shortlists SET status = 2 WHERE (iaf_id = "+params[:iaf]+" and status = 1);");
+
+		ActiveRecord::Base.connection.execute("CREATE TABLE tempTable (iaf_id int, student_id int, status int);");
+		ActiveRecord::Base.connection.execute("INSERT INTO tempTable (SELECT iaf_id, student_id, status FROM shortlists);");
+		ActiveRecord::Base.connection.execute("delete from shortlists where exists (select * from tempTable where tempTable.status=2 and shortlists.student_id=tempTable.student_id and (not shortlists.status = 2));");
+		ActiveRecord::Base.connection.execute("DROP TABLE tempTable;");
+
+		redirect_to shortlist_path(:id => params[:iaf])
+	end
+
 	def show
 		@company_information = CompanyInformation.find(params[:company_information_id])
 		@iaf = @company_information.iafs.find(params[:id])

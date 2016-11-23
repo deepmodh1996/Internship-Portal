@@ -41,9 +41,6 @@ class StudentsController < ApplicationController
   def show
     @student = Student.find(params[:id])
     @iafs = Iaf.all
-    # @iafs.each do |iaf|
-    #   iaf[:id],params[:id]
-    # end
   end
 
   def new
@@ -54,14 +51,23 @@ class StudentsController < ApplicationController
     @student = Student.find(params[:id])
   end
 
+  def verify
+    @student = Student.find(params[:id])
+  end
+
+  def verify_confirm
+    ActiveRecord::Base.connection.execute("UPDATE students SET verified = true WHERE (id = "+params[:id]+");");
+    redirect_to student_verifications_path(params[:id])
+  end
+
   def create
   @student = Student.new(student_params)
  
-	 if @student.save
-    	redirect_to @student, :notice => "Signed up!"
- 	 else
-    	render 'new'
-  	end
+   if @student.save
+      redirect_to root_path, :notice => "Signed up!"
+   else
+      render 'new'
+    end
   end
 
   def update
@@ -94,7 +100,7 @@ end
  
 private
   def student_params
-    params.require(:student).permit(:name, :roll_no, :department, :batch, :program, :category, :dob, :nationality, :sex, :gpo_id, :alt_email, :hostel, :mobile, :alt_mobile, :home_contact, :permanent_addr, :specialization, :skype, :cv, :email, :password, :password_confirmation)
+    params.require(:student).permit(:name, :roll_no, :department, :batch, :program, :category, :dob, :nationality, :sex, :gpo_id, :alt_email, :hostel, :mobile, :alt_mobile, :home_contact, :permanent_addr, :specialization, :skype, :cv, :email, :password, :password_confirmation, :admin, :verified)
   end
 end
 

@@ -1,3 +1,5 @@
+<div id="welcome">
+
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -62,9 +64,11 @@
 
 <p>
   <strong>Type:</strong>
-  <%= @company_information.type %>
+  <%= @company_information.nature %>
 </p>
 
 <%= link_to 'IAFS', company_information_iafs_path(@company_information) %> |
 <%= link_to 'Edit', edit_company_information_path(@company_information) %> |
 <%= link_to 'Back', company_informations_path %>
+
+</div>
