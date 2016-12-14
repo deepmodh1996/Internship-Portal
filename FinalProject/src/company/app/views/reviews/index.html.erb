@@ -1,0 +1,96 @@
+  <div id="menu">
+    <ul>
+      <li><%= link_to "Home", student_path(@student.id) %></li>
+      <li><%= link_to "IAFS", student_all_iafs_path(@student.id) %></li>
+      <li><%= link_to "Resumes", student_verifications_path(@student.id) %></li>
+      <li><%= link_to "Profile", edit_student_path(@student.id) %></li>
+      <li class="current_page_item"><a href="#">Reviews</a></li>
+      <li class="last"><%= link_to "Logout", log_out_path %></li>
+    </ul>
+  </div>
+  <div id="two-columns">
+    <div id="column-list">
+      <h2>Resume</h2>
+      <ul class="list-style2">
+        <li class="first"><%= link_to "One page technical (Resume_1)", @student.cv.url(:original, false) %></li><!-- 
+        <li><%= link_to "Two page technical (Resume_1)", @student.cv.url(:original, false) %></li>
+        <li><%= link_to "Three page technical (Resume_1)", @student.cv.url(:original, false) %></li>
+        <li><%= link_to "One page non-technical (Resume_1)", @student.cv.url(:original, false) %></li>
+        <li><%= link_to "Two page non-technical (Resume_1)", @student.cv.url(:original, false) %></li> -->
+      </ul>
+      <!-- <h2>SOP</h2>
+      <ul class="list-style2 text-center">
+        <li class="first"><%= link_to "SOP 1", @student.cv.url(:original, false) %></li>
+        <li><%= link_to "SOP 2", @student.cv.url(:original, false) %></li>
+        <li><%= link_to "SOP 3", @student.cv.url(:original, false) %></li>
+        <li><%= link_to "SOP 4", @student.cv.url(:original, false) %></li>
+        <li><%= link_to "SOP 5", @student.cv.url(:original, false) %></li>
+      </ul> -->
+    </div>
+    <div id="column-details">
+      <!-- For Student Side -->
+      <h2>Past Reviews</h2>
+      <ul class="list-style1">
+        <% @reviews.each do |review| %>
+        <li class="bottom row">
+          <div class="col-xs-9">
+            <h4><%= review.organisation %></h4>
+            <p><strong><%= review.review %></strong>
+            <% if current_student.admin %>
+            <%= link_to 'Remove Review', student_review_path(:id =>review), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger float-R' %>
+            <% end %>
+          </div>
+        </li>
+        <% end %>
+        
+        <!-- <li class="bottom row">
+          <div class="col-xs-9">
+            <h4>Short listed for KVPY Fellowship Award conducted by IISC, Bangalore</h4>
+            <p><strong>File for Proof : </strong><a href="#">someOtherFile.jpg</a></p>
+          </div>
+          <div class="col-xs-3">Status : <button class="btn btn-success">Validated</button></div>
+        </li>
+        <li class="bottom row">
+          <div class="col-xs-9">
+            <h4>Secured 98/100 in the finals of All India Open Mathematics Scholarship Examination (AIOMSE) conducted by Institute for Promotion of Mathematics (IPM)</h4>
+            <p><strong>File for Proof : </strong><a href="#">someAnotherFile.jpg</a><button class="btn btn-info btn-sm margin-left-5">Edit</button></p>
+            <button class="btn btn-danger">Remove Point</button>
+          </div>
+          <div class="col-xs-3">Status : <button class="btn btn-danger">Invalidated</button><br><strong>Comment : </strong>Proof shows 99/100, Please update the point</div>
+        </li> -->
+        <li class="row">
+          <h2><%= link_to 'Add a Review', new_student_review_path, class: "btn btn-primary btn-lg margin-left-5" %></h2>
+        </li>
+      </ul>
+      <!-- End For Student Side -->
+      <!-- For Verifier Side -->
+      <!-- <h2>Resume_0 <a href="#" class="float-R">140050007-0.pdf</a></h2>
+      <ul class="list-style1">
+        <li class="first row">
+          <div class="col-xs-9">
+            <h4>City Topper in SSC Maharashtra Secondary State Board Examination</h4>
+            <p><strong>File for Proof : </strong><a href="#">someFile.jpg</a></p>
+            <div class="btn-group float-R" role="group" aria-label="..."><button class="btn btn-success">Validate</button><button class="btn btn-danger">Invalidate</button></div>
+          </div>
+          <div class="col-xs-3">Status : <button class="btn btn-secondary">Pending</button></div>
+        </li>
+        <li class="row">
+          <div class="col-xs-9">
+            <h4>Short listed for KVPY Fellowship Award conducted by IISC, Bangalore</h4>
+            <p><strong>File for Proof : </strong><a href="#">someOtherFile.jpg</a></p>
+            <div class="btn-group float-R" role="group" aria-label="..."><button class="btn btn-success">Validate</button><button class="btn btn-danger">Invalidate</button></div>
+          </div>
+          <div class="col-xs-3">Status : <button class="btn btn-success">Validated</button></div>
+        </li>
+        <li class="row">
+          <div class="col-xs-9">
+            <h4>Secured 98/100 in the finals of All India Open Mathematics Scholarship Examination (AIOMSE) conducted by Institute for Promotion of Mathematics (IPM)</h4>
+            <p><strong>File for Proof : </strong><a href="#">someAnotherFile.jpg</a></p>
+            <div class="btn-group float-R" role="group" aria-label="..."><button class="btn btn-success">Validate</button><button class="btn btn-danger">Invalidate</button></div>
+          </div>
+          <div class="col-xs-3">Status : <button class="btn btn-danger">Invalidated</button><br><strong>Comment : </strong>Proof shows 99/100, Please update the point</div>
+        </li>
+      </ul>
+       -->
+    </div>
+  </div>

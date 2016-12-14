@@ -1,0 +1,17 @@
+<h1>Upload CV</h1>
+
+<%= form_for @student, url: {action: "update", params: {id: @student.id}} do |f| %>
+
+
+  <strong>name:</strong>
+  <%= @student.name %>
+</p>
+ 
+
+  <div class="form-group">
+    <%= f.label :image %>
+    <%= f.file_field :cv, class: 'form-control'%>
+  </div>
+
+  <%= f.submit 'Upload', class: 'btn btn-primary' %>
+<% end %>

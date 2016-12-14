@@ -1,0 +1,74 @@
+<div id="welcome">
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @company_information.name %>
+</p>
+
+<p>
+  <strong>Address line1:</strong>
+  <%= @company_information.address_line1 %>
+</p>
+
+<p>
+  <strong>Address line2:</strong>
+  <%= @company_information.address_line2 %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @company_information.city %>
+</p>
+
+<p>
+  <strong>Country:</strong>
+  <%= @company_information.country %>
+</p>
+
+<p>
+  <strong>Pin:</strong>
+  <%= @company_information.pin %>
+</p>
+
+<p>
+  <strong>Url:</strong>
+  <%= @company_information.url %>
+</p>
+
+<p>
+  <strong>Contact person:</strong>
+  <%= @company_information.contact_person %>
+</p>
+
+<p>
+  <strong>Designation:</strong>
+  <%= @company_information.designation %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @company_information.email %>
+</p>
+
+<p>
+  <strong>Contact number:</strong>
+  <%= @company_information.contact_number %>
+</p>
+
+<p>
+  <strong>Cell number:</strong>
+  <%= @company_information.cell_number %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @company_information.nature %>
+</p>
+
+<%= link_to 'IAFS', company_information_iafs_path(@company_information) %> |
+<%= link_to 'Edit', edit_company_information_path(@company_information) %> |
+<%= link_to 'Back', company_informations_path %>
+
+</div>

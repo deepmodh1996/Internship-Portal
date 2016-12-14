@@ -1,0 +1,15 @@
+<%= form_for :review, url: student_reviews_path do |f| %>
+  <p>
+    <%= f.label :organisation %><br>
+    <%= f.text_field :organisation %>
+  </p>
+
+  <p>
+    <%= f.label :review %><br>
+    <%= f.text_area :review %>
+  </p>
+ 
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>

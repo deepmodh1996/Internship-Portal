@@ -1,0 +1,26 @@
+<div id="menu">
+    <ul>
+      <li><%= link_to "Profile", edit_company_information_path(@company_information) %></li>
+      <li class="current_page_item"><a href="#">IAFS</a></li>
+      <li class="last"><%= link_to "All Companies", company_informations_path %></li>
+    </ul>
+  </div>
+<div id="welcome">
+
+<h1>IAF's filled so far </h1>
+<br>
+<table class="table table-striped">
+
+<% @iaf.each do |iaf| %>
+<tr>
+<td><%= iaf.profile %> </td>
+<td><%= link_to 'Shortlist', shortlist_path(params[:company_information_id],iaf)%> </td>
+<td><%=link_to 'Edit IAF',edit_company_information_iaf_path(params[:company_information_id],iaf)%></td>
+<td><%=link_to 'Remove IAF',company_information_iaf_path(params[:company_information_id],iaf), method: :delete, data: {confirm: 'Do you really want to remove the IAF? Once deleted, IAF can\'t be recovered'}%></td>
+</tr>
+<% end %>
+</table>
+
+<%= link_to 'New IAF', new_company_information_iaf_path %>
+
+</div>

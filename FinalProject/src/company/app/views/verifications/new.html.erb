@@ -1,0 +1,23 @@
+<div id="welcome">
+<%= form_for :verification, url: student_verifications_path do |f| %>
+  <p>
+    <%= f.label "Resume Point" %><br>
+    <%= f.text_field :point, class: 'form-control' %>
+  </p>
+ 
+  <p>
+    <%= f.label "proof" %><br>
+    <%= f.file_field :proof, class: 'form-control' %>
+  </p>
+
+    <p>
+    <%= f.label "mail_id" %><br>
+    <%= f.text_area :mail_id, class: 'form-control' %>
+  </p>
+ 
+  <p>
+    <%= f.submit %>
+    <%= link_to "Back", student_verifications_path(@student), class: 'btn btn-primary float-R' %>
+  </p>
+<% end %>
+</div>

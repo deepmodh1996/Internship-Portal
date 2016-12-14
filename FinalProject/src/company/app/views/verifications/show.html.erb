@@ -1,0 +1,17 @@
+<div id="welcome">
+<p>
+  
+    <tr>
+     <td><%= @verification.student_id %> </td>	
+      <td><%= @verification.point %></td>
+      <td> student_id</td>
+      <td><%= @verification.student_id %></td>
+      <td><%= link_to "Download", @verification.proof.url(:original, false) %></td>
+      <td><%= @verification.mail_id %></td>
+    </tr>
+ </p>   
+
+<p><%= link_to 'Add another', new_student_verification_path %> </p>
+<p><%= link_to 'Back', student_verifications_path %>  </p>  
+
+</div>
